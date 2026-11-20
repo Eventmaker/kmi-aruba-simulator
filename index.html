@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>КМІ / Aruba ACSA — Єдиний Інтерактивний Симулятор (ДУІКТ ШІД-21)</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header>
+  <div>
+    <h1>🧪 КМІ / Aruba ACSA — Єдиний Інтерактивний Симулятор</h1>
+    <p>Конвергентна мережна інфраструктура, ч. I (ДУІКТ ШІД-21) · Лекції 1–9 · Labs 1–7 · 24 питання до екзамену</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-sec" onclick="openPane('pane-guide')">📖 Інструкція</button>
+    <button class="btn btn-sec" onclick="openPane('pane-glossary')">📚 Глосарій</button>
+    <button id="theme-btn" class="btn btn-sec" onclick="toggleTheme()">☀️ Світла тема</button>
+    <span class="badge">v2.0 · Offline + GitHub Pages</span>
+  </div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="nav-group">Навігація</div>
+    <button class="nav-btn active" data-pane="pane-guide" onclick="openPane('pane-guide')">📖 Інструкція та Огляд</button>
+    <button class="nav-btn" data-pane="pane-glossary" onclick="openPane('pane-glossary')">📚 Глосарій термінів (Л1–Л9)</button>
+
+    <div class="nav-group">Блок 1 · L1–L2 & CLI (Л1–Л4)</div>
+    <button class="nav-btn" data-pane="pane-osi" onclick="openPane('pane-osi')">1. OSI, TCP & MAC Learning</button>
+    <button class="nav-btn" data-pane="pane-vlan" onclick="openPane('pane-vlan')">2. 802.1Q VLAN & DHCP DORA</button>
+    <button class="nav-btn" data-pane="pane-stp" onclick="openPane('pane-stp')">3. STP / MSTP & LACP</button>
+    <button class="nav-btn" data-pane="pane-cli" onclick="openPane('pane-cli')">4. ArubaOS CLI (Labs 1–6)</button>
+
+    <div class="nav-group">Блок 2 · L3 & OSPF (Л5–Л7)</div>
+    <button class="nav-btn" data-pane="pane-cidr" onclick="openPane('pane-cidr')">5. CIDR Бінарний & VLSM</button>
+    <button class="nav-btn" data-pane="pane-lpm" onclick="openPane('pane-lpm')">6. Маршрутизація (LPM & AD)</button>
+    <button class="nav-btn" data-pane="pane-vrrp" onclick="openPane('pane-vrrp')">7. VRRP Master/Backup</button>
+    <button class="nav-btn" data-pane="pane-ospf" onclick="openPane('pane-ospf')">8. OSPFv2, DR/BDR & Cost</button>
+
+    <div class="nav-group">Блок 3 · VSF, SNMP, Екзамен</div>
+    <button class="nav-btn" data-pane="pane-vsf" onclick="openPane('pane-vsf')">9. VSF Stacking & MAD</button>
+    <button class="nav-btn" data-pane="pane-snmp" onclick="openPane('pane-snmp')">10. SNMP, sFlow & NetEdit 2.0</button>
+    <button class="nav-btn" data-pane="pane-wifi" onclick="openPane('pane-wifi')">11. Wi-Fi SMB & PoE Бюджет</button>
+    <button class="nav-btn" data-pane="pane-exam" onclick="openPane('pane-exam')">12. Екзамен-тренажер (24 пит.)</button>
+  </aside>
+
+  <main>
+    <!-- GUIDE -->
+    <section id="pane-guide" class="pane active">
+      <div class="card">
+        <h2>📖 Як користуватись Єдиним Симулятором КМІ / Aruba ACSA</h2>
+        <p class="muted" style="margin-bottom:12px;">Кожен із 12 модулів містить <b>розгорнуту теоретичну вижимку з термінами</b> (блок «📚 Теорія, вижимка та терміни») та інтерактивний тренажер. Усе працює 100% у браузері як онлайн (GitHub Pages), так і офлайн.</p>
+        <div class="grid-3">
+          <div class="card" style="background:var(--card);margin-bottom:0;">
+            <h3>Блок 1 (Л1–Л4 · Labs 1–6)</h3>
+            <p class="muted">OSI-інкапсуляція, навчання CAM-таблиці, 802.1Q VLAN (<code>untagged</code>/<code>tagged</code>), DHCP DORA, вибори STP Root Bridge із реальною зв'язністю, LACP та CLI-термінал ArubaOS із пресетами Labs 1–6 (включно з Flash/TFTP та IP Routing).</p>
+          </div>
+          <div class="card" style="background:var(--card);margin-bottom:0;">
+            <h3>Блок 2 (Л5–Л7 · Lab 6)</h3>
+            <p class="muted">Бінарний CIDR (<code>/1../32</code>) + Wildcard Mask + оптимальний VLSM-розбивач, правило LPM проти AD, VRRP (із RFC 5798 tie-breaker по IP та Skew Time), OSPFv2 Hello/MTU детектор, вибори DR/BDR та Cost.</p>
+          </div>
+          <div class="card" style="background:var(--card);margin-bottom:0;">
+            <h3>Блок 3 (Л8–Л9 · Екзамен)</h3>
+            <p class="muted">Aruba VSF Stacking (Ring vs Chain + Split-Brain MAD), SNMP v1/v2c/v3 + NetEdit 2.0 + Syslog 0–7, Wi-Fi 2.4/5 ГГц + PoE-бюджет, а також екзаменаційний тренажер на <b>24 питання</b> з розбором помилок.</p>
+          </div>
+        </div>
+        <h3>Рекомендований маршрут підготовки до екзамену (11.12):</h3>
+        <ol class="term-list" style="font-size:0.88rem;margin-top:6px;">
+          <li>Відкрий потрібний модуль → прочитай блок <b>📚 Теорія, вижимка та терміни</b> (2 хв).</li>
+          <li>Поекспериментуй з інтерактивним симулятором (зламай лінк у STP, зміни MTU в OSPF, вимкни MAD у VSF Chain).</li>
+          <li>Закріпи команди у <b>4. ArubaOS CLI</b> (пройди пресети Labs 1–6 і повтори вручну).</li>
+          <li>Пройди <b>12. Екзамен-тренажер</b> до стабільного результату <b>≥ 21/24 (87%+)</b>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- GLOSSARY -->
+    <section id="pane-glossary" class="pane">
+      <div class="card">
+        <h2>📚 Глосарій ключових термінів КМІ / Aruba ACSA (Л1–Л9)</h2>
+        <input id="gloss-search" type="text" placeholder="Пошук терміна (напр. VRRP, tagged, MAD, OSPF, SNMP, 162...)" oninput="filterGlossary()" style="width:100%;margin:8px 0 12px;">
+        <table>
+          <thead><tr><th>Термін</th><th>Тема</th><th>Стисле визначення для екзамену</th></tr></thead>
+          <tbody id="gloss-body">
+            <tr><td><code>PDU</code></td><td>Л1</td><td>Protocol Data Unit: L4 Segment/Datagram, L3 Packet, L2 Frame, L1 Bits.</td></tr>
+            <tr><td><code>CAM / MAC Table</code></td><td>Л1</td><td>Таблиця відповідності MAC-адрес портам комутатора L2 (наповнюється за Source MAC).</td></tr>
+            <tr><td><code>untagged / tagged</code></td><td>Л3</td><td>У HPE ArubaOS: <code>untagged</code> — access-порт до ПК; <code>tagged</code> — 802.1Q порт між комутаторами.</td></tr>
+            <tr><td><code>trunk (Aruba!)</code></td><td>Л4</td><td>У HPE ArubaOS ProVision це <b>агрегація каналів (LAG/LACP)</b>, а НЕ 802.1Q!</td></tr>
+            <tr><td><code>ip helper-address</code></td><td>Л3</td><td>DHCP Relay на маршрутизаторі: пересилає broadcast DHCP Discover як unicast до сервера.</td></tr>
+            <tr><td><code>BID (Bridge ID)</code></td><td>Л4</td><td>Priority (крок 4096, за замовч. 32768) + MAC. Комутатор із найменшим BID стає Root Bridge.</td></tr>
+            <tr><td><code>MSTP (802.1s)</code></td><td>Л4</td><td>Multiple Spanning Tree: групує VLAN в інстанси (MSTI) з окремими Root Bridge для балансування.</td></tr>
+            <tr><td><code>SVI</code></td><td>Л5</td><td>Switched Virtual Interface (<code>vlan 10 → ip address</code>) — L3-шлюз для Inter-VLAN Routing.</td></tr>
+            <tr><td><code>VRRP (RFC 5798)</code></td><td>Л5</td><td>Резервування шлюзу: IP Proto 112, Multicast <code>224.0.0.18</code>, Virtual MAC <code>00-00-5E-00-01-XX</code>.</td></tr>
+            <tr><td><code>LPM vs AD</code></td><td>Л6</td><td>Longest Prefix Match (найдовша маска) ЗАВЖДИ перемагає AD; AD порівнюється лише для однакових масок.</td></tr>
+            <tr><td><code>VLSM / CIDR</code></td><td>Л6</td><td>Змінна довжина маски підмережі: розбиття завжди від найбільшої підмережі до найменшої.</td></tr>
+            <tr><td><code>OSPFv2</code></td><td>Л7</td><td>Link-State (Дейкстра), AD 110, Multicast <code>224.0.0.5</code> / <code>224.0.0.6</code>, Cost = RefBW / BW.</td></tr>
+            <tr><td><code>Wildcard Mask</code></td><td>Л7</td><td>Інвертована маска для OSPF/ACL: <code>255.255.255.255 − SubnetMask</code> (0 = перевіряти, 1 = ігнорувати).</td></tr>
+            <tr><td><code>VSF & MAD</code></td><td>Л8</td><td>Virtual Switching Framework (єдиний логічний комутатор); MAD вимикає менший фрагмент при Split-Brain.</td></tr>
+            <tr><td><code>FCAPS</code></td><td>Л9</td><td>Модель NMS: Fault, Configuration, Accounting, Performance, Security.</td></tr>
+            <tr><td><code>SNMP v1/v2c/v3</code></td><td>Л9</td><td>UDP 161 (Get/Set/Bulk), UDP 162 (Trap/Inform). Тільки SNMPv3 має шифрування (<code>authPriv</code>).</td></tr>
+            <tr><td><code>NetEdit 2.0</code></td><td>Л9</td><td>Оркестратор ArubaOS-CX із життєвим циклом: <b>Plan → Validate → Deploy → Audit</b>.</td></tr>
+            <tr><td><code>sFlow</code></td><td>Л9</td><td>Апаратне семплування (1 із N пакетів на ASIC) для моніторингу 10G/100G без навантаження CPU.</td></tr>
+            <tr><td><code>Syslog</code></td><td>Л9</td><td>UDP 514; рівні критичності 0 (Emergency) … 7 (Debug).</td></tr>
+            <tr><td><code>PoE 802.3af/at/bt</code></td><td>Lab 7</td><td>Живлення по витій парі: af = 15.4W, at (PoE+) = 30W, bt (PoE++) = 60W/90W.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 1. OSI & MAC -->
+    <section id="pane-osi" class="pane">
+      <details class="theory-box" open>
+        <summary>📚 Теорія, вижимка та терміни — Лекція 1 (OSI, TCP/IP, Ethernet, MAC)</summary>
+        <div class="theory-grid">
+          <div>
+            <b>Ключові принципи:</b>
+            <ul class="term-list">
+              <li><b>Інкапсуляція (L7→L1):</b> кожен рівень додає свій заголовок (L2 ще й трейлер FCS/CRC).</li>
+              <li><b>TCP 3-Way Handshake:</b> <code>SYN → SYN-ACK → ACK</code> (надійне з'єднання), на відміну від UDP.</li>
+              <li><b>Комутатор L2:</b> вчить <b>Source MAC</b>, пересилає по <b>Destination MAC</b>.</li>
+            </ul>
+          </div>
+          <div>
+            <b>3 дії комутатора:</b>
+            <ul class="term-list">
+              <li><b>Flooding:</b> Broadcast (<code>FF:FF:FF:FF:FF:FF</code>) або Unknown Unicast → на всі порти крім вхідного.</li>
+              <li><b>Forwarding:</b> Destination MAC є в CAM → точково на 1 порт.</li>
+              <li><b>Filtering:</b> Source і Destination на одному порту → кадр відкидається.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <div class="grid-2">
+        <div class="card">
+          <h2>Модель OSI & Інкапсуляція PDU</h2>
+          <div id="osi-list"></div>
+          <h3>Поточний кадр:</h3>
+          <div id="pdu-bar" class="pdu-bar"></div>
+          <div id="osi-desc" style="margin-top:10px;font-size:0.86rem;"></div>
+        </div>
+        <div class="card">
+          <h2>Симулятор MAC-таблиці комутатора (L2)</h2>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+            <select id="mac-src">
+              <option value="PC1|AA:AA:01|1">PC1 (AA:AA:01 · Port 1)</option>
+              <option value="PC2|BB:BB:02|2">PC2 (BB:BB:02 · Port 2)</option>
+              <option value="PC3|CC:CC:03|3">PC3 (CC:CC:03 · Port 3)</option>
+              <option value="PC4|DD:DD:04|4">PC4 (DD:DD:04 · Port 4)</option>
+            </select>
+            <span style="align-self:center;">→</span>
+            <select id="mac-dst">
+              <option value="PC2|BB:BB:02|2">PC2 (BB:BB:02 · Port 2)</option>
+              <option value="PC1|AA:AA:01|1">PC1 (AA:AA:01 · Port 1)</option>
+              <option value="PC3|CC:CC:03|3">PC3 (CC:CC:03 · Port 3)</option>
+              <option value="BCAST|FF:FF:FF|ALL">Broadcast (FF:FF:FF)</option>
+            </select>
+            <button class="btn" onclick="sendMacFrame()">Надіслати</button>
+            <button class="btn btn-sec" onclick="clearMacTable()">Очистити</button>
+          </div>
+          <table><thead><tr><th>MAC</th><th>Порт</th><th>Тип</th></tr></thead><tbody id="cam-body"></tbody></table>
+          <h3>Журнал комутації:</h3>
+          <div id="mac-log" class="log-box">Готовий до передачі кадрів...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. VLAN & DHCP -->
+    <section id="pane-vlan" class="pane">
+      <details class="theory-box" open>
+        <summary>📚 Теорія, вижимка та терміни — Лекція 3 (802.1Q VLAN, DHCP, ARP)</summary>
+        <div class="theory-grid">
+          <div>
+            <b>802.1Q VLAN (Aruba ProVision):</b>
+            <ul class="term-list">
+              <li><b>VLAN</b> = окремий широкомовний домен L2 (4094 можливих ID, 4-байтний тег <code>0x8100</code>).</li>
+              <li><code>untagged</code> — порти до кінцевих пристроїв (ПК/принтер); тег знімається на виході.</li>
+              <li><code>tagged</code> — магістральні порти між комутаторами/маршрутизаторами.</li>
+            </ul>
+          </div>
+          <div>
+            <b>DHCP (UDP 67/68) & ARP:</b>
+            <ul class="term-list">
+              <li><b>DORA:</b> Discover → Offer → Request → Acknowledge.</li>
+              <li><code>ip helper-address</code> — пересилає DHCP-запит через межу VLAN/L3.</li>
+              <li><b>ARP:</b> Broadcast-запит «Хто має IP X?» → Unicast-відповідь із MAC.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <div class="grid-2">
+        <div class="card">
+          <h2>802.1Q VLAN: Aruba <code>untagged/tagged</code> vs Cisco</h2>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+            <div><label class="muted">Edge_1 Port 1 (PC-A):</label><select id="v-p1" style="width:100%;margin-top:4px;"><option value="10">VLAN 10 (Sales)</option><option value="20">VLAN 20 (IT)</option></select></div>
+            <div><label class="muted">Edge_2 Port 1 (PC-B):</label><select id="v-p2" style="width:100%;margin-top:4px;"><option value="10">VLAN 10 (Sales)</option><option value="20">VLAN 20 (IT)</option></select></div>
+            <div><label class="muted">Аплинк Port 24:</label><select id="v-link" style="width:100%;margin-top:4px;"><option value="both">Tagged VLAN 10, 20 (Правильно)</option><option value="only10">Tagged тільки VLAN 10</option><option value="untagged1">Untagged VLAN 1 (Default)</option></select></div>
+            <div style="display:flex;align-items:flex-end;"><button class="btn" style="width:100%;" onclick="simulateVlan()">Перевірити Ping</button></div>
+          </div>
+          <div id="vlan-res" class="log-box">Натисніть «Перевірити Ping».</div>
+          <table>
+            <thead><tr><th>HPE ArubaOS (ProVision)</th><th>Cisco IOS</th></tr></thead>
+            <tbody>
+              <tr><td><code>vlan 10 → untagged 1</code></td><td><code>switchport access vlan 10</code></td></tr>
+              <tr><td><code>vlan 10 → tagged 24</code></td><td><code>switchport trunk allowed vlan 10</code></td></tr>
+              <tr><td><code>trunk 21-22 trk1 lacp</code> (LAG!)</td><td><code>channel-group 1 mode active</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h2>Інтерактивний DHCP DORA</h2>
+          <div style="display:flex;gap:8px;margin-bottom:10px;">
+            <button class="btn" onclick="nextDora()">Наступний крок DORA</button>
+            <button class="btn btn-sec" onclick="resetDora()">Скинути</button>
+          </div>
+          <div id="dora-steps"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. STP & LACP -->
+    <section id="pane-stp" class="pane">
+      <details class="theory-box" open>
+        <summary>📚 Теорія, вижимка та терміни — Лекція 4 (STP/RSTP/MSTP & LACP)</summary>
+        <div class="theory-grid">
+          <div>
+            <b>Spanning Tree (802.1D / 802.1w / 802.1s):</b>
+            <ul class="term-list">
+              <li><b>Мета:</b> розірвати L2-петлі (Broadcast Storm) без втрати фізичного резервування.</li>
+              <li><b>Root Bridge:</b> найменший Bridge ID (Priority <code>0..61440</code>, крок 4096 + MAC).</li>
+              <li><b>Ролі портів:</b> <b>RP</b> (найкращий шлях до Root), <b>DP</b> (пересилає в сегмент), <b>AP</b> (Blocked/Discarding).</li>
+            </ul>
+          </div>
+          <div>
+            <b>LACP (802.3ad / 802.1AX):</b>
+            <ul class="term-list">
+              <li>Об'єднує 2–8 фізичних портів в один логічний канал (<code>trk1</code>) — сумує швидкість + відмовостійкість.</li>
+              <li>Вимоги до портів: однакові швидкість, дуплекс та налаштування VLAN.</li>
+              <li><code>admin-edge-port</code> (PortFast) — миттєвий перехід клієнтського порту у Forwarding.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <div class="grid-2">
+        <div class="card">
+          <h2>STP / RSTP Root Bridge (коректна зв'язність та обриви)</h2>
+          <div class="grid-3" style="margin-bottom:10px;">
+            <div><label class="muted">Router_1 Prio</label><select id="p-r1" onchange="calcStp()" style="width:100%"><option value="4096">4096</option><option value="8192">8192</option><option value="32768">32768</option></select></div>
+            <div><label class="muted">Edge_1 Prio</label><select id="p-e1" onchange="calcStp()" style="width:100%"><option value="32768" selected>32768</option><option value="4096">4096</option><option value="8192">8192</option></select></div>
+            <div><label class="muted">Edge_2 Prio</label><select id="p-e2" onchange="calcStp()" style="width:100%"><option value="32768" selected>32768</option><option value="4096">4096</option><option value="8192">8192</option></select></div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+            <button id="btn-l12" class="btn btn-green" onclick="toggleStpLink('l12')">Лінк R1↔E1: UP</button>
+            <button id="btn-l13" class="btn btn-green" onclick="toggleStpLink('l13')">Лінк R1↔E2: UP</button>
+            <button id="btn-l23" class="btn btn-green" onclick="toggleStpLink('l23')">Лінк E1↔E2: UP</button>
+          </div>
+          <svg id="stp-svg" viewBox="0 0 540 250"></svg>
+        </div>
+        <div class="card">
+          <h2>Аналіз STP / MSTP та LACP</h2>
+          <div id="stp-info" class="log-box" style="margin-bottom:12px;"></div>
+          <h3>Калькулятор LACP (Lab 4):</h3>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+            <select id="lacp-n" onchange="calcLacp()"><option value="2">2 порти (21-22)</option><option value="4">4 порти (21-24)</option><option value="8">8 портів</option></select>
+            <select id="lacp-spd" onchange="calcLacp()"><option value="1">1 Gbps</option><option value="10">10 Gbps</option></select>
+          </div>
+          <div id="lacp-out" class="log-box"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. ARUBA CLI -->
+    <section id="pane-cli" class="pane">
+      <details class="theory-box">
+        <summary>📚 Теорія, вижимка та терміни — Labs 1–6 (Режими CLI, Flash/TFTP, IP Routing)</summary>
+        <div class="theory-grid">
+          <div>
+            <b>Режими CLI ArubaOS-Switch:</b>
+            <ul class="term-list">
+              <li><code>&gt;</code> Operator (тільки перегляд) → <code>enable</code> → <code>#</code> Manager → <code>configure</code> → <code>(config)#</code> Global Config.</li>
+              <li><code>Primary / Secondary Flash</code> — два розділи для прошивки (Lab 2), бекап конфігів по TFTP.</li>
+            </ul>
+          </div>
+          <div>
+            <b>Ключові команди діагностики:</b>
+            <ul class="term-list">
+              <li><code>show vlan</code>, <code>show trunks</code>, <code>show spanning-tree</code>, <code>show flash</code>, <code>show ip route</code>, <code>show running-config</code>.</li>
+              <li>Завжди зберігай зміни командою <code>write memory</code>!</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <div class="card">
+        <h2>Інтерактивний термінал HPE ArubaOS-Switch (Labs 1–6)</h2>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+          <button class="btn btn-sec" onclick="runPreset('lab1')">Lab 1 (Base)</button>
+          <button class="btn btn-sec" onclick="runPreset('lab2')">Lab 2 (Flash/TFTP)</button>
+          <button class="btn btn-sec" onclick="runPreset('lab3')">Lab 3 (VLANs)</button>
+          <button class="btn btn-sec" onclick="runPreset('lab4')">Lab 4 (LACP)</button>
+          <button class="btn btn-sec" onclick="runPreset('lab5')">Lab 5 (MSTP)</button>
+          <button class="btn btn-sec" onclick="runPreset('lab6')">Lab 6 (IP Routing)</button>
+          <button class="btn btn-danger" onclick="resetCli()">Скинути</button>
+        </div>
+        <div class="term-wrap">
+          <div class="term-head"><span>Aruba-2930F-Simulator (Console COM1 · 9600 8N1)</span><span id="cli-mode-badge">Mode: Manager (#)</span></div>
+          <div id="term-out" class="term-out"></div>
+          <div class="term-in-row">
+            <span id="term-prompt" class="term-prompt">Edge_1#</span>
+            <input id="term-in" class="term-in" type="text" placeholder="Введи команду (напр. help, show flash, configure, ip routing...)" onkeydown="if(event.key==='Enter') execCli()">
+            <button class="btn" onclick="execCli()">Enter</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. CIDR & VLSM -->
+    <section id="pane-cidr" class="pane">
+      <details class="theory-box" open>
+        <summary>📚 Теорія, вижимка та терміни — Лекція 6 (CIDR, VLSM, Wildcard Mask)</summary>
+        <div class="theory-grid">
+          <div>
+            <b>Формули підмереж IPv4:</b>
+            <ul class="term-list">
+              <li>Кількість хостів = <code>2^(32 - prefix) - 2</code> (віднімаємо Network ID та Broadcast).</li>
+              <li>Винятки: <code>/31</code> (RFC 3021, 2 хости для P2P), <code>/32</code> (маршрут до 1 хоста / Loopback).</li>
+              <li><b>Шпаргалка масок:</b> <code>/24</code>=254, <code>/25</code>=126, <code>/26</code>=62, <code>/27</code>=30, <code>/28</code>=14, <code>/29</code>=6, <code>/30</code>=2.</li>
+            </ul>
+          </div>
+          <div>
+            <b>Алгоритм VLSM:</b>
+            <ul class="term-list">
+              <li>Завжди сортуй відділи <b>від найбільшого до найменшого</b>!</li>
+              <li>Обирай найменший степінь двійки <code>2^h - 2 ≥ N_hosts</code>.</li>
+              <li><b>Wildcard Mask</b> = <code>255.255.255.255 - SubnetMask</code> (використовується в OSPF та ACL).</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <div class="grid-2">
+        <div class="card">
+          <h2>Калькулятор CIDR (/1../32) & Wildcard Mask</h2>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+            <input id="cidr-ip" type="text" value="192.168.10.75" style="width:150px;">
+            <span style="align-self:center;font-weight:700;">/</span>
+            <input id="cidr-pfx" type="number" min="1" max="32" value="26" style="width:70px;">
+            <button class="btn btn-green" onclick="calcCidr()">Розрахувати</button>
+          </div>
+          <div id="cidr-out" class="log-box"></div>
+          <h3>32-бітна структура (<span style="color:#38bdf8;">Сині = Мережа</span> · <span style="color:#d97706;">Жовті = Хости</span>):</h3>
+          <div id="cidr-bits" class="bit-row"></div>
+        </div>
+        <div class="card">
+          <h2>Оптимальний VLSM Розбивач</h2>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+            <input id="vlsm-net" type="text" value="10.1.0.0/24" style="width:140px;">
+            <input id="vlsm-reqs" type="text" value="60, 28, 12, 2" style="flex:1;min-width:130px;">
+            <button class="btn btn-green" onclick="calcVlsm()">Розбити</button>
+          </div>
+          <div id="vlsm-warn" style="font-size:0.84rem;font-weight:600;margin-bottom:6px;"></div>
+          <table>
+            <thead><tr><th>LAN</th><th>Хости</th><th>CIDR</th><th>Маска</th><th>Network</th><th>Діапазон</th><th>Broadcast</th></tr></thead>
+            <tbody id="vlsm-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. LPM & AD -->
+    <section id="pane-lpm" class="pane">
+      <details class="theory-box" open>
+        <summary>📚 Теорія, вижимка та терміни — Лекції 5–6 (LPM, Administrative Distance, Inter-VLAN SVI)</summary>
+        <div class="theory-grid">
+          <div>
+            <b>Правила вибору маршруту:</b>
+            <ul class="term-list">
+              <li><b>1. Longest Prefix Match (LPM):</b> завжди перемагає найспецифічніша (найдовша) маска (<code>/25 &gt; /24 &gt; /16 &gt; /0</code>).</li>
+              <li><b>2. Administrative Distance (AD):</b> порівнюється <i>лише</i> при однакових префіксах (менше = краще).</li>
+              <li><b>3. Metric:</b> порівнюється всередині одного протоколу (Cost для OSPF, Hops для RIP).</li>
+            </ul>
+          </div>
+          <div>
+            <b>Стандартні значення AD:</b>
+            <ul class="term-list">
+              <li>Directly Connected = <b>0</b> · Static Route = <b>1</b></li>
+              <li>eBGP = <b>20</b> · OSPF = <b>110</b> · RIP = <b>120</b></li>
+              <li><b>Inter-VLAN Routing:</b> потребує <code>ip routing</code> + SVI (<code>vlan X → ip address</code>).</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <div class="card">
+        <h2>Симулятор таблиці маршрутизації (LPM vs AD)</h2>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+          <input id="lpm-dst" type="text" value="10.1.20.45" style="width:170px;">
+          <button class="btn btn-green" onclick="evalLpm()">Перевірити</button>
+          <button class="btn btn-sec" onclick="document.getElementById('lpm-dst').value='10.1.20.45';evalLpm()">10.1.20.45</button>
+          <button class="btn btn-sec" onclick="document.getElementById('lpm-dst').value='10.1.20.130';evalLpm()">10.1.20.130</button>
+          <button class="btn btn-sec" onclick="document.getElementById('lpm-dst').value='8.8.8.8';evalLpm()">8.8.8.8</button>
+        </div>
+        <table><thead><tr><th>Мережа / Префікс</th><th>Протокол</th><th>AD</th><th>Next-Hop</th><th>Результат</th></tr></thead><tbody id="lpm-body"></tbody></table>
+        <div id="lpm-res" class="log-box" style="margin-top:12px;"></div>
+      </div>
+    </section>
+
+    <!-- 7. VRRP -->
+    <section id="pane-vrrp" class="pane">
+      <details class="theory-box" open>
+        <summary>📚 Теорія, вижимка та терміни — Лекція 5 (VRRP · RFC 5798)</summary>
+        <div class="theory-grid">
+          <div>
+            <b>Механіка VRRP (FHRP):</b>
+            <ul class="term-list">
+              <li>Декілька маршрутизаторів ділять спільний <b>Virtual IP (VIP)</b> та <b>Virtual MAC</b> <code>00-00-5E-00-01-XX</code> (XX = VRID hex).</li>
+              <li><b>IP Protocol 112</b>, Multicast <code>224.0.0.18</code>.</li>
+              <li>Тільки <b>Master</b> шле Advertisement щосекунди і відповідає на ARP для VIP.</li>
+            </ul>
+          </div>
+          <div>
+            <b>Вибори Master та таймери:</b>
+            <ul class="term-list">
+              <li><b>Owner</b> (чиїм реальним IP є VIP) має Priority = <b>255</b>; інші за замовчуванням — <b>100</b> (1..254).</li>
+              <li>При рівному Priority перемагає <b>вища первинна IP-адреса</b>!</li>
+              <li><b>Skew Time</b> = <code>(256 - Priority) / 256</code> сек; <b>Preempt</b> за замовч. ON.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <div class="card">
+        <h2>VRRP Failover & RFC 5798 Tie-Breaker Симулятор</h2>
+        <div class="grid-2" style="margin-bottom:12px;">
+          <div style="background:var(--card);padding:12px;border-radius:8px;border:1px solid var(--border);">
+            <h3>Router_1 (10.1.10.2)</h3>
+            <label class="muted">Priority (1–254):</label><br>
+            <input id="vrrp-p1" type="number" value="150" min="1" max="254" onchange="updateVrrp()" style="width:100%;margin:4px 0 8px;">
+            <button id="vrrp-f1" class="btn btn-green" style="width:100%;" onclick="toggleVrrp('r1')">Стан: UP (Вимкнути)</button>
+          </div>
+          <div style="background:var(--card);padding:12px;border-radius:8px;border:1px solid var(--border);">
+            <h3>Router_2 (10.1.10.3 — вищий IP!)</h3>
+            <label class="muted">Priority (1–254):</label><br>
+            <input id="vrrp-p2" type="number" value="100" min="1" max="254" onchange="updateVrrp()" style="width:100%;margin:4px 0 8px;">
+            <button id="vrrp-f2" class="btn btn-green" style="width:100%;" onclick="toggleVrrp('r2')">Стан: UP (Вимкнути)</button>
+          </div>
+        </div>
+        <label style="font-size:0.86rem;display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+          <input id="vrrp-preempt" type="checkbox" checked onchange="updateVrrp()"> Preempt увімкнено (повернення ролі Master після відновлення)
+        </label>
+        <div id="vrrp-state" class="log-box"></div>
+      </div>
+    </section>
+
+    <!-- 8. OSPFv2 -->
+    <section id="pane-ospf" class="pane">
+      <details class="theory-box" open>
+        <summary>📚 Теорія, вижимка та терміни — Лекція 7 (OSPFv2 Single Area)</summary>
+        <div class="theory-grid">
+          <div>
+            <b>Основи OSPFv2 (Link-State, AD = 110):</b>
+            <ul class="term-list">
+              <li><b>Area 0 (Backbone):</b> усі маршрутизатори мають ідентичну базу <b>LSDB</b> (LSA Type 1 Router + Type 2 Network) і будують дерево за <b>алгоритмом Дейкстри (SPF)</b>.</li>
+              <li><b>Multicast:</b> <code>224.0.0.5</code> (AllSPFRouters), <code>224.0.0.6</code> (AllDRouters).</li>
+              <li><b>Router ID:</b> ручний &gt; найбільший Loopback &gt; найбільший активний IP (має бути унікальним!).</li>
+            </ul>
+          </div>
+          <div>
+            <b>Умови сусідства та DR/BDR:</b>
+            <ul class="term-list">
+              <li>Мають збігатися: <b>Area ID, Subnet Mask, Hello/Dead (10/40s), Auth, Stub-прапори</b> (MTU ламає на ExStart!).</li>
+              <li><b>DR/BDR:</b> найвищий Priority (0 = не бере участі), потім найвищий RID. <b>Без Preempt!</b></li>
+              <li><b>Cost</b> = <code>Reference BW / Interface BW</code> (мін. 1).</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <div class="grid-2">
+        <div class="card">
+          <h2>Детектор сусідства OSPFv2 (Hello & MTU Mismatch)</h2>
+          <table>
+            <thead><tr><th>Параметр</th><th>Router_1</th><th>Router_2</th></tr></thead>
+            <tbody>
+              <tr><td>Area ID</td><td><code>Area 0</code></td><td><select id="o-area" onchange="checkOspf()"><option value="0">Area 0</option><option value="1">Area 1</option></select></td></tr>
+              <tr><td>Subnet Mask</td><td><code>/24</code></td><td><select id="o-mask" onchange="checkOspf()"><option value="24">/24</option><option value="30">/30</option></select></td></tr>
+              <tr><td>Hello / Dead</td><td><code>10s / 40s</code></td><td><select id="o-timer" onchange="checkOspf()"><option value="10/40">10s / 40s</option><option value="30/120">30s / 120s</option></select></td></tr>
+              <tr><td>Auth</td><td><code>MD5</code></td><td><select id="o-auth" onchange="checkOspf()"><option value="md5">MD5</option><option value="none">None</option></select></td></tr>
+              <tr><td>MTU</td><td><code>1500</code></td><td><select id="o-mtu" onchange="checkOspf()"><option value="1500">1500</option><option value="1400">1400</option></select></td></tr>
+            </tbody>
+          </table>
+          <div id="ospf-res" class="log-box" style="margin-top:10px;"></div>
+        </div>
+        <div class="card">
+          <h2>Вибори DR / BDR (Broadcast-сегмент)</h2>
+          <div class="grid-3" style="margin-bottom:8px;">
+            <div><label class="muted">R1 (1.1.1.1) Prio:</label><input id="dr-p1" type="number" min="0" max="255" value="1" onchange="calcOspfDr()" style="width:100%"></div>
+            <div><label class="muted">R2 (2.2.2.2) Prio:</label><input id="dr-p2" type="number" min="0" max="255" value="1" onchange="calcOspfDr()" style="width:100%"></div>
+            <div><label class="muted">R3 (3.3.3.3) Prio:</label><input id="dr-p3" type="number" min="0" max="255" value="0" onchange="calcOspfDr()" style="width:100%"></div>
+          </div>
+          <div id="ospf-dr-out" class="log-box" style="margin-bottom:12px;"></div>
+          <h3>Калькулятор метрики OSPF Cost:</h3>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+            <select id="o-ref" onchange="calcOspfCost()"><option value="100">RefBW: 100 Mbps</option><option value="10000">RefBW: 10,000 Mbps</option><option value="100000">RefBW: 100,000 Mbps</option></select>
+            <select id="o-bw" onchange="calcOspfCost()"><option value="10">10 Mbps</option><option value="100">100 Mbps</option><option value="1000" selected>1 Gbps</option><option value="10000">10 Gbps</option></select>
+          </div>
+          <div id="ospf-cost" class="log-box"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. VSF -->
+    <section id="pane-vsf" class="pane">
+      <details class="theory-box" open>
+        <summary>📚 Теорія, вижимка та терміни — Лекція 8 (Stacking: Backplane vs VSF, MAD)</summary>
+        <div class="theory-grid">
+          <div>
+            <b>VSF (Virtual Switching Framework):</b>
+            <ul class="term-list">
+              <li>Об'єднує комутатори (Aruba 2930F / 6200 / 6300) через стандартні порти 10G/25G SFP+ (до 40 км по оптиці!) в <b>один логічний комутатор</b>.</li>
+              <li><b>Ролі:</b> Commander (control plane), Standby (гарячий резерв), Member.</li>
+              <li><b>Топологія Ring (кільце)</b> витримує розрив 1 кабелю без Split-Brain!</li>
+            </ul>
+          </div>
+          <div>
+            <b>VSF vs Backplane Stacking & MAD:</b>
+            <ul class="term-list">
+              <li><b>Backplane Stacking</b> (2930M / 3810M): спеціальні короткі модулі/кабелі (до 1–3 м) у межах однієї стійки.</li>
+              <li><b>Split-Brain:</b> розпад стеку (в Chain або при 2 обривах у Ring) на два активних стеки з 1 IP/MAC.</li>
+              <li><b>MAD (LLDP / VLAN):</b> виявляє Split-Brain і вимикає порти меншого фрагмента.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <div class="card">
+        <h2>Симулятор Aruba VSF: Ring vs Chain та Split-Brain MAD</h2>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:10px;">
+          <select id="vsf-topo" onchange="renderVsf()">
+            <option value="chain">Топологія: Chain (ланцюжок — вразлива до 1 обриву)</option>
+            <option value="ring">Топологія: Ring (кільце — витримує 1 обрив!)</option>
+          </select>
+          <button id="vsf-cut-btn" class="btn btn-danger" onclick="toggleVsfCut()">Розірвати VSF-лінк між M1 та M2</button>
+          <label style="display:flex;align-items:center;gap:6px;font-size:0.86rem;">
+            <input id="vsf-mad" type="checkbox" checked onchange="renderVsf()"> MAD увімкнено
+          </label>
+        </div>
+        <div class="grid-3" id="vsf-nodes" style="margin:12px 0;"></div>
+        <div id="vsf-log" class="log-box"></div>
+      </div>
+    </section>
+
+    <!-- 10. SNMP & NetEdit -->
+    <section id="pane-snmp" class="pane">
+      <details class="theory-box" open>
+        <summary>📚 Теорія, вижимка та терміни — Лекція 9 (FCAPS, IMC, NetEdit 2.0, SNMP, RMON, sFlow, Syslog)</summary>
+        <div class="theory-grid">
+          <div>
+            <b>NMS, FCAPS & Безпека керування:</b>
+            <ul class="term-list">
+              <li><b>FCAPS:</b> Fault, Configuration, Accounting, Performance, Security.</li>
+              <li><b>HPE IMC:</b> мультивендорна NMS («єдине вікно»), автовиявлення, бекапи.</li>
+              <li><b>SSH (TCP 22)</b> і <b>HTTPS (TCP 443)</b> шифрують трафік; <b>Telnet (TCP 23)</b> — відкритий текст!</li>
+            </ul>
+          </div>
+          <div>
+            <b>SNMP, sFlow & Syslog:</b>
+            <ul class="term-list">
+              <li><b>SNMP:</b> UDP <b>161</b> (Get/GetNext/GetBulk/Set), UDP <b>162</b> (Trap — без ACK, Inform — з ACK).</li>
+              <li><b>SNMPv3:</b> <code>noAuthNoPriv</code>, <code>authNoPriv</code>, <code>authPriv</code> (SHA + AES).</li>
+              <li><b>Syslog (UDP 514):</b> 0 Emergency, 1 Alert, 2 Critical, 3 Error, 4 Warning, 5 Notice, 6 Info, 7 Debug.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <div class="grid-2">
+        <div class="card">
+          <h2>Інспектор SNMP (UDP 161 / 162) & MIB</h2>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+            <select id="snmp-ver" onchange="simSnmp()"><option value="v1">SNMPv1</option><option value="v2c">SNMPv2c</option><option value="v3" selected>SNMPv3 (authPriv)</option></select>
+            <select id="snmp-op" onchange="simSnmp()"><option value="get">GetRequest</option><option value="bulk">GetBulk</option><option value="trap">Trap</option><option value="inform">Inform</option></select>
+          </div>
+          <div id="snmp-out" class="log-box"></div>
+        </div>
+        <div class="card">
+          <h2>Aruba NetEdit 2.0 — Цикл змін (Слайд 29)</h2>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+            <button class="btn btn-purple" onclick="showNetEdit(0)">1. Plan</button>
+            <button class="btn btn-purple" onclick="showNetEdit(1)">2. Validate</button>
+            <button class="btn btn-purple" onclick="showNetEdit(2)">3. Deploy</button>
+            <button class="btn btn-purple" onclick="showNetEdit(3)">4. Audit</button>
+          </div>
+          <div id="ne-out" class="log-box"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. Wi-Fi & PoE -->
+    <section id="pane-wifi" class="pane">
+      <details class="theory-box" open>
+        <summary>📚 Теорія, вижимка та терміни — Lab 7 (Wi-Fi SMB, VSC/VLAN 50, PoE 802.3af/at/bt)</summary>
+        <div class="theory-grid">
+          <div>
+            <b>Радіочастотне планування Wi-Fi:</b>
+            <ul class="term-list">
+              <li><b>2.4 ГГц:</b> лише 3 неперекривні канали — <b>1, 6, 11</b> (більша дальність, менша швидкість).</li>
+              <li><b>5 ГГц:</b> понад 20 неперекривних каналів (вища пропускна здатність, менше завад).</li>
+              <li><b>Lab 7 (VSC):</b> Virtual Service Community зв'язує SSID (Employee/Guest) із VLAN 50 та політикою безпеки WPA2/WPA3 (802.1X).</li>
+            </ul>
+          </div>
+          <div>
+            <b>Power over Ethernet (PoE):</b>
+            <ul class="term-list">
+              <li><b>802.3af (PoE):</b> до <b>15.4 Вт</b> (IP-телефони).</li>
+              <li><b>802.3at (PoE+):</b> до <b>30 Вт</b> (корпоративні точки доступу Wi-Fi).</li>
+              <li><b>802.3bt (PoE++):</b> <b>60 Вт / 90 Вт</b> (PTZ-камери, Wi-Fi 6E/7 AP).</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <div class="grid-2">
+        <div class="card">
+          <h2>Планувальник каналів 2.4 ГГц (1–11)</h2>
+          <div class="grid-3" style="margin-bottom:10px;">
+            <div><label class="muted">AP 1:</label><input id="ch1" type="number" min="1" max="11" value="1" onchange="checkWifi()" style="width:100%"></div>
+            <div><label class="muted">AP 2:</label><input id="ch2" type="number" min="1" max="11" value="6" onchange="checkWifi()" style="width:100%"></div>
+            <div><label class="muted">AP 3:</label><input id="ch3" type="number" min="1" max="11" value="11" onchange="checkWifi()" style="width:100%"></div>
+          </div>
+          <div id="wifi-out" class="log-box"></div>
+        </div>
+        <div class="card">
+          <h2>Калькулятор PoE-бюджету комутатора</h2>
+          <div class="grid-2" style="margin-bottom:10px;">
+            <div><label class="muted">Бюджет комутатора (Вт):</label><input id="poe-max" type="number" value="370" onchange="calcPoe()" style="width:100%"></div>
+            <div><label class="muted">IP-телефони (af · 15.4W):</label><input id="poe-af" type="number" value="10" min="0" onchange="calcPoe()" style="width:100%"></div>
+            <div><label class="muted">Точки доступу (at · 30W):</label><input id="poe-at" type="number" value="6" min="0" onchange="calcPoe()" style="width:100%"></div>
+            <div><label class="muted">PTZ-камери (bt · 60W):</label><input id="poe-bt" type="number" value="0" min="0" onchange="calcPoe()" style="width:100%"></div>
+          </div>
+          <div id="poe-out" class="log-box"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. EXAM -->
+    <section id="pane-exam" class="pane">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+          <h2>🎓 Екзамен-тренажер КМІ / Aruba ACSA (24 питання по Л1–Л9)</h2>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+            <select id="q-filter" onchange="restartQuiz()">
+              <option value="ALL">Усі теми (24 питання)</option>
+              <option value="L1-4">Блок 1: Л1–Л4 (8 питань)</option>
+              <option value="L5-7">Блок 2: Л5–Л7 (9 питань)</option>
+              <option value="L8-9">Блок 3: Л8–Л9 + Lab 7 (7 питань)</option>
+            </select>
+            <span id="q-score" class="badge">Рахунок: 0 / 0</span>
+            <button class="btn btn-sec" onclick="restartQuiz()">Почати заново</button>
+          </div>
+        </div>
+        <div class="progress"><div id="q-bar" class="progress-bar" style="width:0%"></div></div>
+        <div id="q-box"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="js/sim1.js" defer></script>
+<script src="js/sim2.js" defer></script>
+<script src="js/sim3.js" defer></script>
+<script src="js/app.js" defer></script>
+</body>
+</html>
