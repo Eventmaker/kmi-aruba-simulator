@@ -377,7 +377,7 @@
       lab2: ["show flash", "copy running-config tftp 10.1.1.100 edge1_backup.cfg", "boot system flash primary"],
       lab3: ["configure", "vlan 10", "name Employees", "untagged 1-10", "tagged 24", "vlan 20", "name Servers", "untagged 11-15", "tagged 24", "end", "show vlan"],
       lab4: ["configure", "trunk 21-22 trk1 lacp", "vlan 10", "tagged trk1", "end", "show trunks"],
-      lab5: ["configure", "spanning-tree", "spanning-tree config-name DUICT_MSTP", "end", "show spanning-tree"],
+      lab5: ["configure", "spanning-tree", "spanning-tree config-name CORP_MSTP", "end", "show spanning-tree"],
       lab6: ["configure", "hostname Router_1", "ip routing", "vlan 10", "ip address 10.1.10.1 255.255.255.0", "vlan 20", "ip address 10.1.20.1 255.255.255.0", "exit", "ip route 0.0.0.0/0 10.1.254.1", "end", "show ip route"]
     };
     (scripts[name] || []).forEach(processCmd);

@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>КМІ / Aruba ACSA — Єдиний Інтерактивний Симулятор (ДУІКТ ШІД-21)</title>
+  <title>Aruba ACSA — Інтерактивний мережевий симулятор</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <header>
   <div>
-    <h1>🧪 КМІ / Aruba ACSA — Єдиний Інтерактивний Симулятор</h1>
-    <p>Конвергентна мережна інфраструктура, ч. I (ДУІКТ ШІД-21) · Лекції 1–9 · Labs 1–7 · 24 питання до екзамену</p>
+    <h1>🧪 Aruba ACSA — Інтерактивний мережевий симулятор</h1>
+    <p>Основи мереж, 802.1Q VLAN, STP/MSTP, LACP, CIDR/VLSM, VRRP, OSPFv2, VSF, SNMP та ArubaOS CLI</p>
   </div>
   <div class="header-actions">
     <button class="btn btn-sec" onclick="openPane('pane-guide')">📖 Інструкція</button>
@@ -24,15 +24,15 @@
   <aside>
     <div class="nav-group">Навігація</div>
     <button class="nav-btn active" data-pane="pane-guide" onclick="openPane('pane-guide')">📖 Інструкція та Огляд</button>
-    <button class="nav-btn" data-pane="pane-glossary" onclick="openPane('pane-glossary')">📚 Глосарій термінів (Л1–Л9)</button>
+    <button class="nav-btn" data-pane="pane-glossary" onclick="openPane('pane-glossary')">📚 Глосарій термінів</button>
 
-    <div class="nav-group">Блок 1 · L1–L2 & CLI (Л1–Л4)</div>
+    <div class="nav-group">Блок 1 · L1–L2 та CLI</div>
     <button class="nav-btn" data-pane="pane-osi" onclick="openPane('pane-osi')">1. OSI, TCP & MAC Learning</button>
     <button class="nav-btn" data-pane="pane-vlan" onclick="openPane('pane-vlan')">2. 802.1Q VLAN & DHCP DORA</button>
     <button class="nav-btn" data-pane="pane-stp" onclick="openPane('pane-stp')">3. STP / MSTP & LACP</button>
     <button class="nav-btn" data-pane="pane-cli" onclick="openPane('pane-cli')">4. ArubaOS CLI (Labs 1–6)</button>
 
-    <div class="nav-group">Блок 2 · L3 & OSPF (Л5–Л7)</div>
+    <div class="nav-group">Блок 2 · L3, VRRP та OSPF</div>
     <button class="nav-btn" data-pane="pane-cidr" onclick="openPane('pane-cidr')">5. CIDR Бінарний & VLSM</button>
     <button class="nav-btn" data-pane="pane-lpm" onclick="openPane('pane-lpm')">6. Маршрутизація (LPM & AD)</button>
     <button class="nav-btn" data-pane="pane-vrrp" onclick="openPane('pane-vrrp')">7. VRRP Master/Backup</button>
@@ -49,27 +49,27 @@
     <!-- GUIDE -->
     <section id="pane-guide" class="pane active">
       <div class="card">
-        <h2>📖 Як користуватись Єдиним Симулятором КМІ / Aruba ACSA</h2>
-        <p class="muted" style="margin-bottom:12px;">Кожен із 12 модулів містить <b>розгорнуту теоретичну вижимку з термінами</b> (блок «📚 Теорія, вижимка та терміни») та інтерактивний тренажер. Усе працює 100% у браузері як онлайн (GitHub Pages), так і офлайн.</p>
+        <h2>📖 Як користуватись інтерактивним мережевим симулятором</h2>
+        <p class="muted" style="margin-bottom:12px;">Кожен із 12 модулів містить <b>стислу теоретичну вижимку з термінами</b> (блок «📚 Теорія, вижимка та терміни») та інтерактивний тренажер. Усе працює повністю у браузері — як онлайн, так і офлайн без встановлення додаткового ПЗ.</p>
         <div class="grid-3">
           <div class="card" style="background:var(--card);margin-bottom:0;">
-            <h3>Блок 1 (Л1–Л4 · Labs 1–6)</h3>
+            <h3>Блок 1 · L1–L2 та CLI</h3>
             <p class="muted">OSI-інкапсуляція, навчання CAM-таблиці, 802.1Q VLAN (<code>untagged</code>/<code>tagged</code>), DHCP DORA, вибори STP Root Bridge із реальною зв'язністю, LACP та CLI-термінал ArubaOS із пресетами Labs 1–6 (включно з Flash/TFTP та IP Routing).</p>
           </div>
           <div class="card" style="background:var(--card);margin-bottom:0;">
-            <h3>Блок 2 (Л5–Л7 · Lab 6)</h3>
+            <h3>Блок 2 · L3, VRRP та OSPF</h3>
             <p class="muted">Бінарний CIDR (<code>/1../32</code>) + Wildcard Mask + оптимальний VLSM-розбивач, правило LPM проти AD, VRRP (із RFC 5798 tie-breaker по IP та Skew Time), OSPFv2 Hello/MTU детектор, вибори DR/BDR та Cost.</p>
           </div>
           <div class="card" style="background:var(--card);margin-bottom:0;">
-            <h3>Блок 3 (Л8–Л9 · Екзамен)</h3>
-            <p class="muted">Aruba VSF Stacking (Ring vs Chain + Split-Brain MAD), SNMP v1/v2c/v3 + NetEdit 2.0 + Syslog 0–7, Wi-Fi 2.4/5 ГГц + PoE-бюджет, а також екзаменаційний тренажер на <b>24 питання</b> з розбором помилок.</p>
+            <h3>Блок 3 · VSF, SNMP та Тести</h3>
+            <p class="muted">Aruba VSF Stacking (Ring vs Chain + Split-Brain MAD), SNMP v1/v2c/v3 + NetEdit 2.0 + Syslog 0–7, Wi-Fi 2.4/5 ГГц + PoE-бюджет, а також тренажер на <b>24 питання</b> з розбором помилок.</p>
           </div>
         </div>
-        <h3>Рекомендований маршрут підготовки до екзамену (11.12):</h3>
+        <h3>Рекомендований маршрут навчання:</h3>
         <ol class="term-list" style="font-size:0.88rem;margin-top:6px;">
           <li>Відкрий потрібний модуль → прочитай блок <b>📚 Теорія, вижимка та терміни</b> (2 хв).</li>
           <li>Поекспериментуй з інтерактивним симулятором (зламай лінк у STP, зміни MTU в OSPF, вимкни MAD у VSF Chain).</li>
-          <li>Закріпи команди у <b>4. ArubaOS CLI</b> (пройди пресети Labs 1–6 і повтори вручну).</li>
+          <li>Закріпи команди у <b>4. ArubaOS CLI</b> (пройди готові сценарії Labs 1–6 і повтори вручну).</li>
           <li>Пройди <b>12. Екзамен-тренажер</b> до стабільного результату <b>≥ 21/24 (87%+)</b>.</li>
         </ol>
       </div>
@@ -78,7 +78,7 @@
     <!-- GLOSSARY -->
     <section id="pane-glossary" class="pane">
       <div class="card">
-        <h2>📚 Глосарій ключових термінів КМІ / Aruba ACSA (Л1–Л9)</h2>
+        <h2>📚 Глосарій ключових мережевих термінів (Aruba ACSA)</h2>
         <input id="gloss-search" type="text" placeholder="Пошук терміна (напр. VRRP, tagged, MAD, OSPF, SNMP, 162...)" oninput="filterGlossary()" style="width:100%;margin:8px 0 12px;">
         <table>
           <thead><tr><th>Термін</th><th>Тема</th><th>Стисле визначення для екзамену</th></tr></thead>
@@ -577,7 +577,7 @@
           <div id="snmp-out" class="log-box"></div>
         </div>
         <div class="card">
-          <h2>Aruba NetEdit 2.0 — Цикл змін (Слайд 29)</h2>
+          <h2>Aruba NetEdit 2.0 — Цикл керування конфігураціями</h2>
           <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
             <button class="btn btn-purple" onclick="showNetEdit(0)">1. Plan</button>
             <button class="btn btn-purple" onclick="showNetEdit(1)">2. Validate</button>
@@ -639,13 +639,13 @@
     <section id="pane-exam" class="pane">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-          <h2>🎓 Екзамен-тренажер КМІ / Aruba ACSA (24 питання по Л1–Л9)</h2>
+          <h2>🎓 Екзамен-тренажер Aruba ACSA (24 питання)</h2>
           <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
             <select id="q-filter" onchange="restartQuiz()">
               <option value="ALL">Усі теми (24 питання)</option>
-              <option value="L1-4">Блок 1: Л1–Л4 (8 питань)</option>
-              <option value="L5-7">Блок 2: Л5–Л7 (9 питань)</option>
-              <option value="L8-9">Блок 3: Л8–Л9 + Lab 7 (7 питань)</option>
+              <option value="L1-4">Блок 1: L1–L2, VLAN, STP, CLI (8 питань)</option>
+              <option value="L5-7">Блок 2: CIDR, LPM, VRRP, OSPF (9 питань)</option>
+              <option value="L8-9">Блок 3: VSF, SNMP, Wi-Fi (7 питань)</option>
             </select>
             <span id="q-score" class="badge">Рахунок: 0 / 0</span>
             <button class="btn btn-sec" onclick="restartQuiz()">Почати заново</button>
